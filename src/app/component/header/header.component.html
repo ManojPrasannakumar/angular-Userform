@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <span>User Information</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="add" (click)="showUserForm()">
+    <span>Add User</span><mat-icon>person_add</mat-icon>
+  </button>
+
+  <button mat-icon-button class="group" (click)="showAllUser()">
+    <span>All Users</span><mat-icon>group</mat-icon>
+  </button>
+
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+
+</mat-toolbar>

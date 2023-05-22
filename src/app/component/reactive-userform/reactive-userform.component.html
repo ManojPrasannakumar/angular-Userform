@@ -1,0 +1,106 @@
+<div class="main-css ::ng-deep mat-form- class">
+<div class="login-form">
+  <h1>Reactive Form</h1>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+    [formGroup]="loginForm"
+    (ngSubmit)="submitUser()"
+  >
+    <div formGroupName="userData" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error
+          *ngIf="
+            loginForm.get('userData.email')?.errors &&
+            (loginForm.get('userData.email')?.errors)!['required']
+          "
+        >
+          Email is required
+        </mat-error>
+        <mat-error
+          *ngIf="
+            loginForm.get('userData.email')?.errors &&
+            (loginForm.get('userData.email')?.errors)!['email']
+          "
+        >
+          Email is not valid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error
+          *ngIf="
+            loginForm.get('userData.password')?.errors &&
+            (loginForm.get('userData.password')?.errors)!['required']
+          "
+        >
+          Password is required
+        </mat-error>
+        <mat-error
+          *ngIf="
+            loginForm.get('userData.password')?.errors &&
+            (loginForm.get('userData.password')?.errors)!['minlength']
+          "
+        >
+          Length of password is short
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your technology</mat-label>
+      <input matInput formControlName="tech" />
+      <button mat-icon-button matSuffix
+      (click)="addNewTech()"
+      type="button"
+      [attr.aria-label]="'Add new skill'"
+      [disabled]="this.loginForm.get('tech')?.invalid"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-error *ngIf="this.loginForm.get('tech')?.errors && (this.loginForm.get('tech')?.errors)!['techNotAllowed']">
+          Entered tech is not allowed
+      </mat-error>
+    </mat-form-field>
+
+
+   <mat-accordion appearance="fill">
+     <mat-expansion-panel addbutton>
+       <mat-expansion-panel-header>
+         <mat-panel-title>
+          List of tech skills
+         </mat-panel-title>
+       </mat-expansion-panel-header>
+        <mat-form-field formArrayName="skills"
+          *ngFor="let techs of techSkills; let i=index">
+          <input type="text" matInput [formControlName]="i">
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <div>
+    <button mat-raised-button type="button" (click)="submitUser()" color="primary">
+      Login
+    </button>
+
+    <button mat-raised-button type="button" (click)="reset()" color="warn">
+      Reset
+    </button>
+    </div>
+  </form>
+  <!--
+    <mat-list role="list" *ngFor="let item of techSkills">
+        <mat-list-item role="listitem"
+          >{{item.value}}</mat-list-item
+        >
+      </mat-list>
+      <mat-error *ngIf="
+            loginForm.get('tech')?.errors &&
+            (loginForm.get('tech')?.errors)!['required']">
+          Email is required
+        </mat-error> -->
+</div>
+</div>

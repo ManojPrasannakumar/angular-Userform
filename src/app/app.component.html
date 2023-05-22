@@ -1,0 +1,11 @@
+<ng-container *ngIf="loginStatus">
+<app-header (currentPage)="changeCurrentpage($event)"></app-header>
+
+<app-userform *ngIf="currentPage ==='add'"></app-userform>
+<app-allusers *ngIf="currentPage ==='all'"></app-allusers>
+</ng-container>
+
+
+<app-login *ngIf="!loginStatus"></app-login>
+
+<!-- <app-reactive-userform></app-reactive-userform> -->

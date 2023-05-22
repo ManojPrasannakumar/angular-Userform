@@ -1,0 +1,33 @@
+<mat-card class="usercard">
+    <div fxLayout="column" fxLayoutAlign="space-around center" *ngIf ="!loading">
+      <!--    -->
+      <mat-form-field appearance="fill" class="name-field">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)] = "empName" (keyup)="checkDisabled()">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="gender-field" >
+        <mat-label>Gender</mat-label>
+        <mat-select [(ngModel)] = "empGender" (selectionChange)="checkDisabled()">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+                <mat-option value="Others">Others</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="text-field">
+        <mat-label>Skill-Set/Proficiancy</mat-label>
+        <textarea matInput [(ngModel)] = "empTech" (keyup)="checkDisabled()"></textarea>
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary"
+      [disabled]="isDisabled"
+      (click)="addUserForm()"
+      data="submit"
+      class="sbt">
+      Submit
+      </button>
+
+       <app-userformheader [isDisabled]="isDisabled"></app-userformheader>
+  </div>
+  <mat-spinner color="warn" *ngIf ="loading"></mat-spinner>
+</mat-card>
